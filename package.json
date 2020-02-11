@@ -52,12 +52,12 @@
     "linux": {
       "target": "AppImage",
       "category": "Network",
+      "executableName": "shadowsocks-electron",
       "desktop": {
         "Type": "Application",
         "Encoding": "UTF-8",
         "Name": "Shadowsocks Electron",
         "Comment": "Shadowsocks GUI with cross-platform desktop support",
-        "Exec": "shadowsocks-electron",
         "Terminal": "false"
       }
     },
