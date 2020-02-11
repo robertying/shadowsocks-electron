@@ -1,13 +1,15 @@
 # Shadowsocks Electron
 
-[![Build Status](https://travis-ci.com/robertying/shadowsocks-electron.svg?branch=master)](https://travis-ci.com/robertying/shadowsocks-electron)
+![CI](https://github.com/robertying/shadowsocks-electron/workflows/push/badge.svg)
 
 Shadowsocks GUI with cross-platform desktop support based on Electron ⚛️, made specially for Linux users.
+
+![screenshot](./assets/screenshot.png)
 
 ## Why?
 
 - [`shadowsocks/shadowsocks-qt5`](https://github.com/shadowsocks/shadowsocks-qt5) has been deprecated.
-- Only `Shadowsocks-libev` and `Shadowsocks for Android` support ACL (bypass China IPs, etc.)
+- Only [`Shadowsocks-libev`](https://github.com/shadowsocks/shadowsocks-libev) and [`Shadowsocks for Android`](https://github.com/shadowsocks/shadowsocks-android) support ACL (bypass China IPs, etc.)
 - I am lazy. I want an out-of-the-box App which handles proxy setup easily, even on Linux desktops.
 
 This project was heavily inspired by [shadowsocks/ShadowsocksX-NG](https://github.com/shadowsocks/ShadowsocksX-NG), which uses local Shadowsocks-libev binary to avoid complex integration with native C code. This means it can always use the latest Shadowsocks-libev version.
