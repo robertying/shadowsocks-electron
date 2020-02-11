@@ -1,9 +1,6 @@
-name: push
+name: CI
 
-on:
-  push:
-    branches:
-      - master
+on: [push, pull_request]
 
 jobs:
   check:
@@ -19,10 +16,10 @@ jobs:
 
   release:
     needs: [check]
-    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         os: [macos-latest, ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v1
       - name: Install dependencies
