@@ -1,6 +1,6 @@
 # Shadowsocks Electron
 
-![CI](https://github.com/robertying/shadowsocks-electron/workflows/push/badge.svg)
+[![Build Status](https://travis-ci.com/robertying/shadowsocks-electron.svg?branch=master)](https://travis-ci.com/robertying/shadowsocks-electron)
 
 Shadowsocks GUI with cross-platform desktop support based on Electron ⚛️, made specially for Linux users.
 
