@@ -5,6 +5,8 @@ import { setMainWindow, stopClient } from "./proxy";
 import logger from "./logs";
 import { setupAfterInstall } from "./install";
 
+app.setAppUserModelId("io.robertying.shadowsocks-electron");
+
 const createWindow = () => {
   const win = new BrowserWindow({
     width: 400,

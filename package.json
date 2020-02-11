@@ -20,6 +20,7 @@
     "build": "yarn build:main && yarn build:renderer",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
+    "release": "build",
     "eject": "react-app-rewired eject",
     "analyze": "source-map-explorer 'build/static/js/*.js'",
     "lint": "eslint --ext .tsx,.ts .",
@@ -44,15 +45,42 @@
       }
     ],
     "mac": {
-      "category": "public.app-category.utilities"
+      "target": "default",
+      "category": "public.app-category.utilities",
+      "darkModeSupport": true
     },
     "linux": {
-      "category": "Network"
-    }
+      "target": "AppImage",
+      "category": "Network",
+      "desktop": {
+        "Type": "Application",
+        "Encoding": "UTF-8",
+        "Name": "Shadowsocks Electron",
+        "Comment": "Shadowsocks GUI with cross-platform desktop support",
+        "Exec": "shadowsocks-electron",
+        "Terminal": "false"
+      }
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "portable"
+      ]
+    },
+    "publish": [
+      {
+        "provider": "bintray"
+      },
+      {
+        "provider": "github",
+        "releaseType": "prerelease"
+      }
+    ]
   },
   "dependencies": {
     "electron-is-dev": "1.1.0",
     "electron-store": "5.1.0",
+    "electron-updater": "4.2.0",
     "fs-extra": "8.1.0",
     "node-fetch": "2.6.0",
     "open": "7.0.2",
