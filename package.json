@@ -1,0 +1,122 @@
+{
+  "name": "shadowsocks-electron",
+  "version": "1.0.0",
+  "description": "Shadowsocks GUI with cross-platform desktop support",
+  "author": {
+    "name": "Rui Ying",
+    "email": "yingrui205@gmail.com"
+  },
+  "repository": "https://github.com/robertying/shadowsocks-electron",
+  "license": "MIT",
+  "homepage": ".",
+  "main": "public/electron.js",
+  "private": true,
+  "scripts": {
+    "start:main": "nodemon",
+    "start:renderer": "BROWSER=none react-app-rewired start",
+    "start": "concurrently \"yarn start:renderer\" \"wait-on http://localhost:3000 && yarn start:main\"",
+    "build:main": "cp -R renderer/types main/ && yarn tsc -p main/tsconfig.json",
+    "build:renderer": "react-app-rewired build",
+    "build": "yarn build:main && yarn build:renderer",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "eject": "react-app-rewired eject",
+    "analyze": "source-map-explorer 'build/static/js/*.js'",
+    "lint": "eslint --ext .tsx,.ts .",
+    "typecheck": "tsc --noUnusedLocals",
+    "postinstall": "electron-builder install-app-deps"
+  },
+  "build": {
+    "appId": "io.robertying.shadowsocks-electron",
+    "productName": "Shadowsocks Electron",
+    "copyright": "© 2020 Rui Ying",
+    "extraFiles": [
+      {
+        "from": "bin/${os}/${arch}",
+        "to": "bin"
+      },
+      {
+        "from": "pac",
+        "to": "pac",
+        "filter": [
+          "!.gitignore"
+        ]
+      }
+    ],
+    "mac": {
+      "category": "public.app-category.utilities"
+    },
+    "linux": {
+      "category": "Network"
+    }
+  },
+  "dependencies": {
+    "electron-is-dev": "1.1.0",
+    "electron-store": "5.1.0",
+    "fs-extra": "8.1.0",
+    "node-fetch": "2.6.0",
+    "open": "7.0.2",
+    "winston": "3.2.1"
+  },
+  "devDependencies": {
+    "@material-ui/core": "4.9.2",
+    "@material-ui/icons": "4.9.1",
+    "@types/node": "12.12.26",
+    "@types/node-fetch": "2.5.4",
+    "@types/react": "16.9.19",
+    "@types/react-dom": "16.9.5",
+    "@types/react-redux": "7.1.7",
+    "@types/react-router-dom": "5.1.3",
+    "@types/uuid": "3.4.7",
+    "babel-plugin-import": "1.13.0",
+    "concurrently": "5.1.0",
+    "customize-cra": "0.9.1",
+    "electron": "8.0.0",
+    "electron-builder": "22.3.2",
+    "husky": "4.2.1",
+    "lint-staged": "10.0.7",
+    "nodemon": "2.0.2",
+    "prettier": "1.19.1",
+    "react": "16.12.0",
+    "react-app-rewired": "2.1.5",
+    "react-dom": "16.12.0",
+    "react-redux": "7.1.3",
+    "react-router-dom": "5.1.2",
+    "react-scripts": "3.3.1",
+    "redux": "4.0.5",
+    "redux-persist": "6.0.0",
+    "redux-persist-electron-storage": "2.1.0",
+    "source-map-explorer": "2.2.2",
+    "typeface-roboto": "0.0.75",
+    "typescript": "3.7.5",
+    "uuid": "3.4.0",
+    "wait-on": "4.0.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged && yarn lint && yarn typecheck"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "nodemonConfig": {
+    "watch": [
+      "main"
+    ],
+    "ignore": [
+      "main/types/**/*"
+    ],
+    "ext": "ts,json",
+    "exec": "yarn build:main && electron ."
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    "Electron >= 8"
+  ]
+}
