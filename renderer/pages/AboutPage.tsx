@@ -1,6 +1,7 @@
 import React from "react";
 import { Container, Typography } from "@material-ui/core";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
+import packageJson from "../../package.json";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -19,7 +20,7 @@ const AboutPage: React.FC = () => {
   return (
     <Container className={styles.container}>
       <Typography variant="h6" gutterBottom>
-        Shadowsocks Electron
+        Shadowsocks Electron {packageJson.version}
       </Typography>
       <Typography variant="body1" gutterBottom>
         Shadowsocks GUI with cross-platform desktop support
