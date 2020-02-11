@@ -1,9 +1,12 @@
 import { app, BrowserWindow } from "electron";
 import isDev from "electron-is-dev";
 import path from "path";
+import { autoUpdater } from "electron-updater";
 import { setMainWindow, stopClient } from "./proxy";
 import logger from "./logs";
 import { setupAfterInstall } from "./install";
+
+autoUpdater.logger = logger;
 
 app.setAppUserModelId("io.robertying.shadowsocks-electron");
 
@@ -32,6 +35,8 @@ const createWindow = () => {
 app.on("ready", async () => {
   await setupAfterInstall();
   createWindow();
+
+  autoUpdater.checkForUpdatesAndNotify();
 });
 
 app.on("window-all-closed", () => {
