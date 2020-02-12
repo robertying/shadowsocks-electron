@@ -29,6 +29,8 @@ const AboutPage: React.FC = () => {
         variant="body2"
         component="a"
         href="https://github.com/robertying/shadowsocks-electron"
+        target="_blank"
+        rel="noopener noreferrer"
         gutterBottom
         color="primary"
       >

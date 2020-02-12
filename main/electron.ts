@@ -1,4 +1,4 @@
-import { app, BrowserWindow, Tray, Menu } from "electron";
+import { app, BrowserWindow, Tray, Menu, shell } from "electron";
 import isDev from "electron-is-dev";
 import path from "path";
 import os from "os";
@@ -38,6 +38,7 @@ const createWindow = () => {
   win.hide();
   win.removeMenu();
   win.setVisibleOnAllWorkspaces(true);
+  win.setAlwaysOnTop(true);
 
   win.on("minimize", (e: Electron.Event) => {
     e.preventDefault();
@@ -59,6 +60,10 @@ const createWindow = () => {
 
   setMainWindow(win);
 
+  win.webContents.on("new-window", (e, url) => {
+    e.preventDefault();
+    shell.openExternal(url);
+  });
   isDev && win.webContents.openDevTools();
 };
 
