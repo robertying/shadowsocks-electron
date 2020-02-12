@@ -13,9 +13,12 @@ jobs:
         run: yarn lint
       - name: Run typescript
         run: yarn typecheck
+      - name: Run build
+        run: yarn build
 
   release:
     needs: [check]
+    if: startsWith(github.ref, 'refs/tags/v')
     strategy:
       matrix:
         os: [macos-latest, ubuntu-latest, windows-latest]
@@ -34,7 +37,7 @@ jobs:
           APPLE_ID: ${{ secrets.APPLE_ID }}
           APPLE_ID_PASS: ${{ secrets.APPLE_ID_PASS }}
         with:
+          release: true
           github_token: ${{ secrets.github_token }}
-          release: ${{ startsWith(github.ref, 'refs/tags/v') }}
           mac_certs: ${{ secrets.mac_certs }}
           mac_certs_password: ${{ secrets.mac_certs_password }}
