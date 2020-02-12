@@ -1,9 +1,11 @@
-import React, { useEffect } from "react";
-import { CssBaseline, Theme, ThemeProvider } from "@material-ui/core";
+import React, { useEffect, useState, useCallback } from "react";
+import { CssBaseline } from "@material-ui/core";
 import {
   makeStyles,
   createStyles,
-  createMuiTheme
+  createMuiTheme,
+  Theme,
+  ThemeProvider
 } from "@material-ui/core/styles";
 import {
   BrowserRouter as Router,
@@ -22,11 +24,26 @@ import { store, persistor } from "./redux/store";
 import Loading from "./components/Loading";
 import { SET_STATUS } from "./redux/actions/status";
 
+const nativeTheme = remote.nativeTheme;
 const { isConnected } = remote.require("./proxy");
 
-const theme = createMuiTheme({
+const mainTheme = createMuiTheme({
   palette: {
-    secondary: { main: "#ffffff" }
+    secondary: {
+      main: "#fff"
+    }
+  }
+});
+
+const darkTheme = createMuiTheme({
+  palette: {
+    type: "dark",
+    primary: {
+      main: "#1769aa"
+    },
+    secondary: {
+      main: "#424242"
+    }
   }
 });
 
@@ -53,6 +70,8 @@ ipcRenderer.on("connected", (e, message) => {
 const App: React.FC = () => {
   const styles = useStyles();
 
+  const [darkMode, setDarkMode] = useState(nativeTheme.shouldUseDarkColors);
+
   useEffect(() => {
     store.dispatch({
       type: SET_STATUS,
@@ -61,10 +80,21 @@ const App: React.FC = () => {
     });
   }, []);
 
+  const listener = useCallback(() => {
+    setDarkMode(nativeTheme.shouldUseDarkColors);
+  }, []);
+
+  useEffect(() => {
+    nativeTheme.addListener("updated", listener);
+    return () => {
+      nativeTheme.removeListener("updated", listener);
+    };
+  }, [listener]);
+
   return (
     <Provider store={store}>
       <PersistGate loading={<Loading />} persistor={persistor}>
-        <ThemeProvider theme={theme}>
+        <ThemeProvider theme={darkMode ? darkTheme : mainTheme}>
           <Router>
             <div className={styles.root}>
               <CssBaseline />

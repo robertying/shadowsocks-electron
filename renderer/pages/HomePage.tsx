@@ -277,7 +277,7 @@ const HomePage: React.FC = () => {
           {loading ? (
             <CircularProgress
               className={styles.extendedIcon}
-              color="secondary"
+              color="inherit"
               size={20}
             />
           ) : (

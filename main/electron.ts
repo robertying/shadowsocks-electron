@@ -68,7 +68,7 @@ const createTray = () => {
       __dirname,
       os.platform() === "win32"
         ? "../assets/icon.ico"
-        : "../assets/tray-light.png"
+        : "../assets/trayTemplate.png"
     )
   );
 
