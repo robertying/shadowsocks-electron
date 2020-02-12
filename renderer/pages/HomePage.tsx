@@ -169,6 +169,7 @@ const HomePage: React.FC = () => {
         await startClient(config.find(i => i.id === selectedServer)!, settings);
       }
 
+      await new Promise(resolve => setTimeout(resolve, 1000));
       setLoading(false);
     }
   };
