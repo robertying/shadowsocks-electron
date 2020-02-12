@@ -46,7 +46,10 @@
     "mac": {
       "target": "default",
       "category": "public.app-category.utilities",
-      "darkModeSupport": true
+      "darkModeSupport": true,
+      "extendInfo": {
+        "LSUIElement": 1
+      }
     },
     "afterSign": "./scripts/notarize.js",
     "linux": {
