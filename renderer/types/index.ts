@@ -54,6 +54,7 @@ export interface Settings {
   localPort: number;
   pacPort: number;
   gfwListUrl: string;
+  autoLaunch: boolean;
 }
 
 export interface Status {

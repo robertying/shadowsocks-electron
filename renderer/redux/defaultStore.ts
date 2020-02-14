@@ -12,7 +12,8 @@ const defaultStore: RootState = {
     localPort: 1080,
     pacPort: 1090,
     gfwListUrl:
-      "https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt"
+      "https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt",
+    autoLaunch: false
   }
 };
 

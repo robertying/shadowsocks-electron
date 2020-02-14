@@ -14,7 +14,8 @@ import {
   DialogContentText,
   DialogActions,
   Button,
-  Snackbar
+  Snackbar,
+  Divider
 } from "@material-ui/core";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { remote } from "electron";
@@ -23,6 +24,8 @@ import { useTypedSelector, CLEAR_STORE } from "../redux/reducers";
 import { SET_SETTING } from "../redux/actions/settings";
 import { Settings } from "../types";
 
+const app = remote.app;
+const platform = remote.process.platform;
 const { openLogDir } = remote.require("./logs");
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -38,6 +41,10 @@ const useStyles = makeStyles((theme: Theme) =>
       width: "100%"
     },
     textField: {
+      marginBottom: theme.spacing(2)
+    },
+    margin: {
+      marginTop: theme.spacing(2),
       marginBottom: theme.spacing(2)
     }
   })
@@ -80,6 +87,13 @@ const SettingsPage: React.FC = () => {
       key,
       value: e.target.checked
     });
+
+    if (key === "autoLaunch" && platform !== "linux") {
+      app.setLoginItemSettings({
+        openAtLogin: e.target.checked,
+        openAsHidden: true
+      });
+    }
   };
 
   const handleSnackbarClose = () => {
@@ -138,10 +152,23 @@ const SettingsPage: React.FC = () => {
         value={settings.gfwListUrl}
         onChange={e => handleValueChange("gfwListUrl", e)}
       />
-      <List
-        className={styles.list}
-        subheader={<ListSubheader>Debugging</ListSubheader>}
-      >
+      <List className={styles.list}>
+        <ListItem>
+          <ListItemText
+            primary="Launch on Boot"
+            secondary="Not applicable to Linux"
+          />
+          <ListItemSecondaryAction>
+            <Switch
+              edge="end"
+              color="primary"
+              checked={settings.autoLaunch}
+              onChange={e => handleSwitchValueChange("autoLaunch", e)}
+            />
+          </ListItemSecondaryAction>
+        </ListItem>
+        <Divider className={styles.margin} />
+        <ListSubheader>Debugging</ListSubheader>
         <ListItem>
           <ListItemText
             primary="Verbose"
