@@ -19,7 +19,10 @@ import {
   Select,
   MenuItem,
   InputLabel,
-  Snackbar
+  Snackbar,
+  InputAdornment,
+  Input,
+  FormControl
 } from "@material-ui/core";
 import {
   useTheme,
@@ -29,6 +32,8 @@ import {
 } from "@material-ui/core/styles";
 import { TransitionProps } from "@material-ui/core/transitions/transition";
 import CloseIcon from "@material-ui/icons/Close";
+import Visibility from "@material-ui/icons/Visibility";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import { Config, encryptMethods, plugins } from "../types";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -138,6 +143,18 @@ const EditServerDialog: React.FC<EditServerDialogProps> = props => {
     onValues(values as Config);
   };
 
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleClickShowPassword = () => {
+    setShowPassword(v => !v);
+  };
+
+  const handleMouseDownPassword = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event.preventDefault();
+  };
+
   return (
     <Dialog
       fullScreen={fullScreen}
@@ -182,14 +199,25 @@ const EditServerDialog: React.FC<EditServerDialogProps> = props => {
           value={values.serverPort ?? ""}
           onChange={e => handleValueChange("serverPort", e)}
         />
-        <TextField
-          required
-          fullWidth
-          type="password"
-          label="Password"
-          value={values.password ?? ""}
-          onChange={e => handleValueChange("password", e)}
-        />
+        <FormControl required fullWidth>
+          <InputLabel htmlFor="password">Password</InputLabel>
+          <Input
+            id="password"
+            type={showPassword ? "text" : "password"}
+            value={values.password ?? ""}
+            onChange={e => handleValueChange("password", e)}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                >
+                  {showPassword ? <Visibility /> : <VisibilityOff />}
+                </IconButton>
+              </InputAdornment>
+            }
+          />
+        </FormControl>
         <InputLabel required style={{ marginBottom: 0 }}>
           Encryption
         </InputLabel>
