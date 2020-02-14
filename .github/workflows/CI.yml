@@ -25,10 +25,14 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v1
-      - name: Install dependencies
+      - name: Setup node
         uses: actions/setup-node@v1
         with:
           node-version: 12
+      - name: Install dependencies
+        run: yarn
+      - name: Download binary
+        run: node scripts/download.js
       - name: Build and release apps
         uses: samuelmeuli/action-electron-builder@v1
         env:
