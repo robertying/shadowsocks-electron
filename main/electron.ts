@@ -69,7 +69,7 @@ const createWindow = () => {
 
 const createTray = () => {
   tray = new Tray(
-    path.join(
+    path.resolve(
       __dirname,
       os.platform() === "win32"
         ? "../assets/icon.ico"

@@ -30,6 +30,9 @@
     "appId": "io.robertying.shadowsocks-electron",
     "productName": "Shadowsocks Electron",
     "copyright": "© 2020 Rui Ying",
+    "files": [
+      "assets/**/*"
+    ],
     "extraFiles": [
       {
         "from": "bin/${os}/${arch}",
