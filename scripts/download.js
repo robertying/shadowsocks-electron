@@ -5,8 +5,8 @@ const os = require("os");
 const path = require("path");
 
 const target =
-  os.type() === "Linux" ? "linux" : os.type() === "Darwin" ? "mac" : "windows";
-const targetAlternative =
+  os.type() === "Linux" ? "linux" : os.type() === "Darwin" ? "mac" : "win";
+const platform =
   os.type() === "Linux"
     ? "linux"
     : os.type() === "Darwin"
@@ -69,12 +69,7 @@ const downloadGitHubAssets = async (url, target, arch, saveAs) => {
     )
   );
 
-  await downloadGitHubAssets(
-    v2rayUrl,
-    targetAlternative,
-    "amd64",
-    "v2ray.tar.gz"
-  );
+  await downloadGitHubAssets(v2rayUrl, platform, "amd64", "v2ray.tar.gz");
 
   console.log("Extracting...");
   await new Promise((resolve, reject) =>
@@ -95,12 +90,7 @@ const downloadGitHubAssets = async (url, target, arch, saveAs) => {
     )
   );
 
-  await downloadGitHubAssets(
-    kcptunUrl,
-    targetAlternative,
-    "amd64",
-    "kcptun.tar.gz"
-  );
+  await downloadGitHubAssets(kcptunUrl, platform, "amd64", "kcptun.tar.gz");
 
   console.log("Extracting...");
   await new Promise((resolve, reject) =>
@@ -123,22 +113,19 @@ const downloadGitHubAssets = async (url, target, arch, saveAs) => {
 
   console.log("Removing other binary...");
 
+  if (target !== "win") {
+    await fs.remove(path.resolve(__dirname, "bin/ss-manager"));
+  }
   await fs.remove(
     path.resolve(
       __dirname,
-      target === "windows" ? "bin/ss-manager.exe" : "bin/ss-manager"
+      target === "win" ? "bin/ss-server.exe" : "bin/ss-server"
     )
   );
   await fs.remove(
     path.resolve(
       __dirname,
-      target === "windows" ? "bin/ss-server.exe" : "bin/ss-server"
-    )
-  );
-  await fs.remove(
-    path.resolve(
-      __dirname,
-      target === "windows" ? "bin/ss-tunnel.exe" : "bin/ss-tunnel"
+      target === "win" ? "bin/ss-tunnel.exe" : "bin/ss-tunnel"
     )
   );
 
@@ -148,11 +135,11 @@ const downloadGitHubAssets = async (url, target, arch, saveAs) => {
     path.resolve(__dirname, `../bin/${target}/${arch}/`)
   );
   await fs.copyFile(
-    path.resolve(__dirname, `v2ray-plugin_${targetAlternative}_amd64`),
+    path.resolve(__dirname, `v2ray-plugin_${platform}_amd64`),
     path.resolve(__dirname, `../bin/${target}/${arch}/v2ray-plugin`)
   );
   await fs.copyFile(
-    path.resolve(__dirname, `client_${targetAlternative}_amd64`),
+    path.resolve(__dirname, `client_${platform}_amd64`),
     path.resolve(__dirname, `../bin/${target}/${arch}/kcptun`)
   );
 

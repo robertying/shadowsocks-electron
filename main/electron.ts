@@ -40,7 +40,7 @@ const createWindow = () => {
     }
   });
 
-  if (platform !== "linux") {
+  if (platform === "darwin") {
     win.hide();
   }
   win.removeMenu();

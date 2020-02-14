@@ -22,7 +22,7 @@ const logger = winston.createLogger({
   level: "info",
   transports: [
     new winston.transports.File({
-      filename: path.join(
+      filename: path.resolve(
         logDir,
         `shadowsocks-electron-${new Date().toISOString()}.log`
       ),

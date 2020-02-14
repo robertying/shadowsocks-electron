@@ -36,7 +36,10 @@
     "extraFiles": [
       {
         "from": "bin/${os}/${arch}",
-        "to": "bin"
+        "to": "bin",
+        "filter": [
+          "!.gitignore"
+        ]
       },
       {
         "from": "pac",

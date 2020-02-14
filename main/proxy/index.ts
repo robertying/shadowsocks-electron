@@ -9,6 +9,8 @@ import { startPacServer, stopPacServer } from "../server";
 import { generateFullPac } from "../pac";
 import { setupIfFirstRun, binDir } from "../install";
 
+const platform = os.platform();
+
 let mainWindow: BrowserWindow | null = null;
 
 export const setMainWindow = (window: BrowserWindow) => {
@@ -25,7 +27,7 @@ const setProxy = async (
     return;
   }
 
-  switch (os.platform()) {
+  switch (platform) {
     case "darwin":
       if (status === "off") {
         await networksetup.unsetProxy();
@@ -86,9 +88,13 @@ const spawnClient = async (config: Config, settings: Settings) => {
     (config.timeout ?? "60").toString()
   ];
 
-  ssLocal = spawn("./ss-local", args, {
-    cwd: binDir
-  });
+  ssLocal = spawn(
+    platform === "win32" ? "./ss-local.exe" : "./ss-local",
+    args,
+    {
+      cwd: binDir
+    }
+  );
 
   ssLocal.stdout?.once("data", async () => {
     logger.info("Started ss-local");
