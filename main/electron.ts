@@ -8,21 +8,25 @@ import logger from "./logs";
 import { setupAfterInstall } from "./install";
 import { getBestWindowPosition } from "./helpers";
 
+const platform = os.platform();
+
 autoUpdater.logger = logger;
 
 const width = 400;
 const height = 460;
 
 app.setAppUserModelId("io.robertying.shadowsocks-electron");
-app.dock.hide();
+app.dock?.hide();
 
 let win: BrowserWindow;
 let tray: Tray;
 let quitting = false;
 
 const showWindow = () => {
-  const position = getBestWindowPosition(win, tray);
-  win.setPosition(position.x, position.y);
+  if (platform === "darwin" || platform === "win32") {
+    const position = getBestWindowPosition(win, tray);
+    win.setPosition(position.x, position.y);
+  }
   win.show();
 };
 
@@ -30,12 +34,15 @@ const createWindow = () => {
   win = new BrowserWindow({
     width,
     height,
+    icon: path.resolve(__dirname, "../assets/logo.png"),
     webPreferences: {
       nodeIntegration: true
     }
   });
 
-  win.hide();
+  if (platform !== "linux") {
+    win.hide();
+  }
   win.removeMenu();
   win.setVisibleOnAllWorkspaces(true);
   win.setAlwaysOnTop(true);
@@ -71,9 +78,11 @@ const createTray = () => {
   tray = new Tray(
     path.resolve(
       __dirname,
-      os.platform() === "win32"
+      platform === "darwin"
+        ? "../assets/trayTemplate.png"
+        : platform === "win32"
         ? "../assets/icon.ico"
-        : "../assets/trayTemplate.png"
+        : "../assets/logo.png"
     )
   );
 
@@ -100,7 +109,7 @@ const createTray = () => {
     }
   ]);
 
-  if (os.release() !== "linux") {
+  if (platform !== "linux") {
     tray.on("click", e => {
       if (win.isVisible()) {
         win.hide();
