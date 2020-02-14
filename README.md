@@ -6,6 +6,16 @@ Shadowsocks GUI with cross-platform desktop support based on Electron ⚛️, ma
 
 ![screenshot](./assets/screenshot.png)
 
+## Downloads
+
+- Bintray
+
+  [![Download](https://api.bintray.com/packages/robertying/shadowsocks-electron/shadowsocks-electron/images/download.svg)](https://bintray.com/robertying/shadowsocks-electron/shadowsocks-electron/_latestVersion)
+
+- GitHub Releases
+
+  [![Download](https://img.shields.io/github/downloads/robertying/shadowsocks-electron/total?label=Download)](https://github.com/robertying/shadowsocks-electron/releases/latest)
+
 ## Why?
 
 - [`shadowsocks/shadowsocks-qt5`](https://github.com/shadowsocks/shadowsocks-qt5) has been deprecated.
@@ -34,6 +44,7 @@ It also uses Electron to bring the most powerful cross-platform desktop support 
 
 - Ubuntu (linux x64)
 - macOS (darwin x64)
+- Windows (windows x64)
 
 > WIP: Other platforms or Linux distributions are coming soon.
 
