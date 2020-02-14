@@ -72,7 +72,10 @@
     },
     "publish": [
       {
-        "provider": "bintray"
+        "provider": "bintray",
+        "package": "shadowsocks-electron",
+        "repo": "shadowsocks-electron",
+        "owner": "robertying"
       },
       {
         "provider": "github",
