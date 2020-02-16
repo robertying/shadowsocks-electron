@@ -44,7 +44,7 @@ It also uses Electron to bring the most powerful cross-platform desktop support 
 
 - Ubuntu (linux x64)
 - macOS (darwin x64)
-- Windows (windows x64)
+- <del>Windows (windows x64)</del>
 
 > WIP: Other platforms or Linux distributions are coming soon.
 
