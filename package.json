@@ -91,7 +91,7 @@
   },
   "dependencies": {
     "electron-is-dev": "1.1.0",
-    "electron-store": "5.1.0",
+    "electron-store": "5.1.1",
     "electron-updater": "4.2.2",
     "fs-extra": "8.1.0",
     "node-fetch": "2.6.0",
