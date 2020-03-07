@@ -133,7 +133,7 @@
     "typeface-roboto": "0.0.75",
     "typescript": "3.8.3",
     "uuid": "3.4.0",
-    "wait-on": "4.0.0"
+    "wait-on": "4.0.1"
   },
   "husky": {
     "hooks": {
