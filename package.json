@@ -112,7 +112,7 @@
     "concurrently": "5.1.0",
     "customize-cra": "0.9.1",
     "dotenv": "8.2.0",
-    "electron": "8.1.0",
+    "electron": "8.1.1",
     "electron-builder": "22.4.0",
     "electron-notarize": "0.2.1",
     "husky": "4.2.3",
