@@ -95,7 +95,7 @@
     "electron-updater": "4.2.5",
     "fs-extra": "8.1.0",
     "node-fetch": "2.6.0",
-    "open": "7.0.2",
+    "open": "7.0.3",
     "winston": "3.2.1"
   },
   "devDependencies": {
