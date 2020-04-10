@@ -90,7 +90,7 @@
     ]
   },
   "dependencies": {
-    "electron-is-dev": "1.1.0",
+    "electron-is-dev": "1.2.0",
     "electron-store": "5.1.1",
     "electron-updater": "4.2.5",
     "fs-extra": "9.0.0",
