@@ -117,7 +117,7 @@
     "electron-notarize": "0.3.0",
     "husky": "4.2.3",
     "lint-staged": "10.0.9",
-    "nodemon": "2.0.2",
+    "nodemon": "2.0.4",
     "prettier": "2.0.2",
     "react": "16.13.1",
     "react-app-rewired": "2.1.5",
